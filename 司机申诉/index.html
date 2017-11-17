@@ -84,7 +84,7 @@
                 <div class='uploadProgress'></div>
                 <input type="file" id="fileElem3" name="avatar" accept="image/*" >
                 <input type="hidden" name='identity_img_id' id="identity_img_id" value="<?= isset($driverInfo['car_license_img_id']) ? $driverInfo['car_license_img_id'] : ''?>">
-                <img class='img' name='identity_img_id' src="<{asset:media/g2/M02/10/04/rBEBP1hPli-ICujPAAAEVWaj5ZwAAGQ7AP_-5MAAARt612.png}>"/>
+                <img class='img' name='identity_img_id' src="add_plus.png"/>
             </div>
         </div>
         <div class='boxCont2'>
@@ -93,7 +93,7 @@
                 <div class='uploadProgress'></div>
                 <input type="file" id="fileElem4" name="avatar" accept="image/*" >
                 <input type="hidden" name='identity_back_img_id' id="identity_back_img_id" value="<?= isset($driverInfo['identity_back_img_id']) ? $driverInfo['identity_back_img_id'] : ''?>">
-                <img class='img' name='identity_back_img_id' src="<{asset:media/g2/M02/10/04/rBEBP1hPli-ICujPAAAEVWaj5ZwAAGQ7AP_-5MAAARt612.png}>"/>
+                <img class='img' name='identity_back_img_id' src="add_plus.png"/>
             </div>
         </div>
         <div class='boxCont2'>
@@ -102,7 +102,7 @@
                 <div class='uploadProgress'></div>
                 <input type="file" id="fileElem5" name="avatar" accept="image/*" >
                 <input type="hidden" name='identity_hand_img_id' id="identity_hand_img_id" value="<?= isset($driverInfo['identity_hand_img_id']) ? $driverInfo['identity_hand_img_id'] : ''?>">
-                <img class='img' name='identity_hand_img_id' src="<{asset:media/g2/M02/10/04/rBEBP1hPli-ICujPAAAEVWaj5ZwAAGQ7AP_-5MAAARt612.png}>"/>
+                <img class='img' name='identity_hand_img_id' src="add_plus.png"/>
             </div>
         </div>
     </div>
@@ -110,7 +110,7 @@
     </div>
     <div id="error"></div>
     <div class="success">
-        <img class="icon" src="<{asset:media/g2/M03/0E/13/rBEBP1gb7zqIBVUeAAA5ycywy4cAAFkxgCZjAMAADnh283.png}>" alt="申诉已提交"><br>
+        <img class="icon" src="success.png" alt="申诉已提交"><br>
         <div class="submited">申诉已提交</div>
         <div class="des">
             处理结果将在7个工作日内<br>
@@ -118,58 +118,60 @@
         </div>
         <input type="button" id="backBtn" value="返回">
     </div>
-    <!--    <script type="text/javascript" src="jquery.min.js"></script> -->
-    <script src="<{asset:js/jquery/jquery-1.7.2.min.js}>"></script>
-    <script src="<{asset:js/mobile/uploadFile.src.js}>"></script>
-    <script src="<{asset:js/do/do.all.js}>"></script>
+    <!--   -->
+    <script type="text/javascript" src="jquery-2.0.0.min.js"></script> 
+    <script type="text/javascript" src="uploadFile.js"></script> 
     
-        <script>
-            $(function(){
-                
-                $('#tel').on('keydown',function(e){
-                    var keycode=e.keyCode;
-                    if(keycode==8||(96<=keycode&&keycode<=105)||(48<=keycode&keycode<=57)){
-                        if ($(this).val().length>=11) {
-                            if (keycode==8) {return;}
-                            e.stopPropagation();
-                            e.preventDefault();
-                            return false;
-                        }
-                    }else{
+    <!--<script src="<{asset:js/jquery/jquery-1.7.2.min.js}>"></script>
+    <script src="<{asset:js/mobile/uploadFile.src.js}>"></script>
+    <script src="<{asset:js/do/do.all.js}>"></script>-->
+    
+    <script>
+        $(function(){
+            $('#tel').on('keydown',function(e){
+                var keycode=e.keyCode;
+                if(keycode==8||(96<=keycode&&keycode<=105)||(48<=keycode&keycode<=57)){
+                    if ($(this).val().length>=11) {
+                        if (keycode==8) {return;}
                         e.stopPropagation();
                         e.preventDefault();
                         return false;
                     }
-                });
-                $('#order_id').on('keydown',function(e){
-                    var keycode=e.keyCode;
-                    if(keycode==8||(96<=keycode&&keycode<=105)||(48<=keycode&keycode<=57)){
-                        if ($(this).val().length>=19) {
-                            if (keycode==8) {return;}
-                            e.stopPropagation();
-                            e.preventDefault();
-                            return false;
-                        }
-                    }else{
+                }else{
+                    e.stopPropagation();
+                    e.preventDefault();
+                    return false;
+                }
+            });
+            $('#order_id').on('keydown',function(e){
+                var keycode=e.keyCode;
+                if(keycode==8||(96<=keycode&&keycode<=105)||(48<=keycode&keycode<=57)){
+                    if ($(this).val().length>=19) {
+                        if (keycode==8) {return;}
                         e.stopPropagation();
                         e.preventDefault();
                         return false;
                     }
-                });
-                $('#reason').on('input',function(){
-                    $('#word_counts').text($(this).val().length);
-                });
-                $('#reason').on('keydown',function(e){
-                    if ($(this).val().length>=300) {
-                        if(e.keyCode==8){
-                            return;
-                        }
-                        e.stopPropagation();
-                        e.preventDefault();
-                        return false;
+                }else{
+                    e.stopPropagation();
+                    e.preventDefault();
+                    return false;
+                }
+            });
+            $('#reason').on('input',function(){
+                $('#word_counts').text($(this).val().length);
+            });
+            $('#reason').on('keydown',function(e){
+                if ($(this).val().length>=300) {
+                    if(e.keyCode==8){
+                        return;
                     }
-                });
-            
+                    e.stopPropagation();
+                    e.preventDefault();
+                    return false;
+                }
+            });
+        
             $('#tel,#order_id,#reason').on('focus',function(){
                 $('#error').hide();
             })
@@ -219,10 +221,7 @@
                     //$reason.focus();
                     return false;
                 }
-                $(this).attr('disabled',true).addClass('disabled');
-                setTimeout(function(){
-                    $('#submit').removeAttr('disabled').removeClass('disabled');
-                },5000);
+                
                 if($('#identity_img_id').val() == '') {
                     var img1 = '';
                 } else {
@@ -239,6 +238,17 @@
                     var img3 = $('#identity_hand_img_id').val();
                 }
                 var imgText1 = img1 + img2 + img3;
+                
+                if (imgText1==""){
+                    showError('至少上传一张图');
+                    return false;
+                }
+                
+                $(this).attr('disabled',true).addClass('disabled');
+                setTimeout(function(){
+                    $('#submit').removeAttr('disabled').removeClass('disabled');
+                },5000);
+                
                 var data = {'order_id':$order_id.val().trim(),'driver_phone':$tel.val().trim(),'reason':$reason.val().trim(),pic_url : imgText1}
                 $.ajax({
                     /*

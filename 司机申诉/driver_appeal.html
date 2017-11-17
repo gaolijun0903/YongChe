@@ -292,11 +292,13 @@
             $('#backBtn').on('click',function() {
                 $('.success').hide();
                 $('#tel,#order_id,#order_date,#reason').val('');
-            })
+            });
+            
+            function showError(msg){
+	            $('#error').text(msg).slideDown();
+	        }
         });
-        function showError(msg){
-            $('#error').text(msg).slideDown();
-        }
+        
     </script>
     <script type="text/javascript">
 	    htext = '提交申诉';
@@ -389,29 +391,29 @@
                                 var tctx = tCanvas.getContext("2d");
                                 var maxsize = 1 * 1024;
 
-                                    var result = this.result;
-                                    var img = new Image();
-                                    imgs = img;
-                                    img.src = result;
-                                   
-                                    //如果图片大小小于100kb，则直接上传
-                                    if (result.length <= maxsize){
-                                        img = null;
-                                        return;
-                                    }
-                    //                图片加载完毕之后进行压缩，然后上传
-                                    if (img.complete) {
-                                        callback();
-                                    } else {
-                                        img.onload = callback;
-                                    }
-                                    function callback() {
-                                        var data = compress(img);
-                                        //upload(data, file.type, $(li));
-                                        img = null;
-                                    }
+                                var result = this.result;
+                                var img = new Image();
+                                imgs = img;
+                                img.src = result;
+                               
+                                //如果图片大小小于100kb，则直接上传
+                                if (result.length <= maxsize){
+                                    img = null;
+                                    return;
+                                }
+                				//图片加载完毕之后进行压缩，然后上传
+                                if (img.complete) {
+                                    callback();
+                                } else {
+                                    img.onload = callback;
+                                }
+                                function callback() {
+                                    var data = compress(img);
+                                    //upload(data, file.type, $(li));
+                                    img = null;
+                                }
                               
-                                //    使用canvas对大图片进行压缩
+                                //使用canvas对大图片进行压缩
                                 function compress(img) {
                                     var initSize = img.src.length;
                                     var width = img.width;
@@ -427,14 +429,14 @@
                                     }
                                     canvas.width = width;
                                     canvas.height = height;
-                            //        铺底色
+                            		//铺底色
                                     ctx.fillStyle = "#fff";
                                     ctx.fillRect(0, 0, canvas.width, canvas.height);
                                     //如果图片像素大于100万则使用瓦片绘制
                                     var count;
                                     if ((count = width * height / 1000000) > 1) {
                                         count = ~~(Math.sqrt(count)+1); //计算要分成多少块瓦片
-                            //            计算每块瓦片的宽和高
+                            			//计算每块瓦片的宽和高
                                         var nw = ~~(width / count);
                                         var nh = ~~(height / count);
                                         tCanvas.width = nw;
@@ -449,7 +451,7 @@
                                         ctx.drawImage(img, 0, 0, width, height);
                                     }
                                     //进行最小压缩
-                                   var ndata = canvas.toDataURL('image/jpg', 0.2);
+                                   	var ndata = canvas.toDataURL('image/jpg', 0.2);
                                     /*console.log('压缩前：' + initSize);
                                     console.log('压缩后：' + ndata.length);
                                     console.log('压缩率：' + ~~(100 * (initSize - ndata.length) / initSize) + "%");*/
@@ -459,7 +461,7 @@
                                     //return ndata;
                                 }
 
-                            //  图片上传，将base64的图片转成二进制对象，塞进formdata上传
+                            	//图片上传，将base64的图片转成二进制对象，塞进formdata上传
                                 function upload(  basestr, type, $li) {
                                     var text = window.atob(basestr.split(",")[1]);
                                     var buffer = new Uint8Array(text.length);
