@@ -469,7 +469,7 @@
                 $('.uploadProgress').hide(); 
                 
             },
-        		getBlob:function (buffer, format){
+        		getBlob:function (buffer, format){// 获取blob对象的兼容性写法
 		        var Builder = window.WebKitBlobBuilder || window.MozBlobBuilder;
 		        if(Builder){
 		            var builder = new Builder;
@@ -479,10 +479,7 @@
 		            return new window.Blob([ buffer ], {type: format});
 		        }
 		    }
-        };
-        
-        // 获取blob对象的兼容性写法
-		    
+        }; 
     </script>
     <script type="text/javascript">
 
