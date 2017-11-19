@@ -45,8 +45,8 @@
         .phone img { display: block; width: auto; height: 100%; margin: 0 auto;}
         .phone img.img { height: 1rem; width: auto; margin: 20px auto;}
 	    .ntn { background-color: #666}
-        .uploadProgress { display: none; position: absolute; width: 100%; height: 100%; text-align: center;background-color: #fff; opacity: .5; line-height: 1rem; font-size: .5    rem;}
-	    .boxCont2 .det { border-radius: 50%; background-color: #ff5252; width: .6rem; height: .6rem; line-height: .4rem; text-align: center; color: #fff; position: absolute; right: -0.35rem; top: -0.35rem; font-size: 1rem; display: none;}
+        .uploadProgress { display: none; position: absolute; width: 100%; height: 100%; text-align: center;background-color: #fff; opacity: .5; line-height: 2rem; font-size: .5rem;}
+	    .boxCont2 .det { border-radius: 50%; background-color: #ff5252; width: .6rem; height: .6rem; line-height: .6rem; text-align: center; color: #fff; position: absolute; right: -0.35rem; top: -0.35rem; font-size: 1rem; display: none;}
     </style>
 </head>
 <body>
@@ -90,7 +90,7 @@
                 <div class='uploadProgress'></div>
                 <input type="file" id="fileElem3" name="avatar" accept="image/*" >
                 <input type="hidden" name='identity_img_id' id="identity_img_id" value="">
-                <img class='img' name='identity_img_id' src="add_plus.png"/>
+                <img class='img' name='identity_img_id' src="<{asset:media/g2/M02/10/04/rBEBP1hPli-ICujPAAAEVWaj5ZwAAGQ7AP_-5MAAARt612.png}>"/>
             </div>
         </div>
         <div class='boxCont2'>
@@ -99,7 +99,7 @@
                 <div class='uploadProgress'></div>
                 <input type="file" id="fileElem4" name="avatar" accept="image/*" >
                 <input type="hidden" name='identity_back_img_id' id="identity_back_img_id" value="">
-                <img class='img' name='identity_back_img_id' src="add_plus.png"/>
+                <img class='img' name='identity_back_img_id' src="<{asset:media/g2/M02/10/04/rBEBP1hPli-ICujPAAAEVWaj5ZwAAGQ7AP_-5MAAARt612.png}>"/>
             </div>
         </div>
         <div class='boxCont2'>
@@ -108,7 +108,7 @@
                 <div class='uploadProgress'></div>
                 <input type="file" id="fileElem5" name="avatar" accept="image/*" >
                 <input type="hidden" name='identity_hand_img_id' id="identity_hand_img_id" value="">
-                <img class='img' name='identity_hand_img_id' src="add_plus.png"/>
+                <img class='img' name='identity_hand_img_id' src="<{asset:media/g2/M02/10/04/rBEBP1hPli-ICujPAAAEVWaj5ZwAAGQ7AP_-5MAAARt612.png}>"/>
             </div>
         </div>
     </div>
@@ -116,7 +116,7 @@
     </div>
     <div id="error"></div>
     <div class="success">
-        <img class="icon" src="success.png" alt="申诉已提交"><br>
+        <img class="icon" src="<{asset:media/g2/M03/0E/13/rBEBP1gb7zqIBVUeAAA5ycywy4cAAFkxgCZjAMAADnh283.png}>" alt="申诉已提交"><br>
         <div class="submited">申诉已提交</div>
         <div class="des">
             处理结果将在7个工作日内<br>
@@ -126,7 +126,7 @@
     </div>
     <!--   -->
     <!--<script type="text/javascript" src="jquery-2.0.0.min.js"></script> 
-    <script type="text/javascript" src="uploadFile.js"></script> -->
+    <script type="text/javascript" src="uploadFile.js"></script>-->
     
     <script src="<{asset:js/jquery/jquery-1.7.2.min.js}>"></script>
     <script src="<{asset:js/mobile/uploadFile.src.js}>"></script>
@@ -252,14 +252,9 @@
                 });
             });
             $('#backBtn').on('click',function() {
-	                $('.success').hide();
-	                $('#tel,#order_id,#reason').val('');
-	            });
-	            $('.boxCont2 .det').on('click',function() {
-	            $(this).siblings('.phone').find('img').addClass('img').attr('src','<{asset:media/g2/M02/10/04/rBEBP1hPli-ICujPAAAEVWaj5ZwAAGQ7AP_-5MAAARt612.png}>');
-	            $(this).siblings('.phone').find('input').val('');
-	            $(this).hide();
-	        });
+                $('.success').hide();
+                $('#tel,#order_id,#reason').val('');
+            });
 	         function showError(msg){
                 $('#error').text(msg).slideDown();
             }
@@ -268,36 +263,29 @@
         </script>
         <script type="text/javascript">
 	    //图片上传代码
-	    var llStr = '';
-        function ll() {
-            isWeiXin() ? llStr = 1 : llStr = 0;
-            if(llStr == 1) {return false} 
-            navigator.userAgent.indexOf('UCBrowser') > -1 ? llStr = 1 : llStr = 0;
-        }
-        ll();
-        function isWeiXin(){
-            var ua = window.navigator.userAgent.toLowerCase();
-            if(ua.match(/MicroMessenger/i) == 'micromessenger'){
-                return true;
-            }else{
-                return false;
-            }
-        }
-        
-        var imgSize = 5*1024*1024;
-        var imgText = '请上传小于5M的图片';
-        if(!!llStr) {
-            imgSize = 3*1024*1024;
-            imgText = '请上传小于3M的图片';
-        }
-
-        
         var params = {
             url: "/greencar/ajax/upload.php",
+            isWeiXinOrUC: function (){
+	            var ua = window.navigator.userAgent.toLowerCase();
+	            if(ua.match(/MicroMessenger/i) == 'micromessenger' || ua.indexOf('ucbrowser')>-1){
+	                return true;
+	            }else{
+	                return false;
+	            }
+	        },
             filter: function(files) {
-                var file = files[0];//不可多选，只有一个文件
+            		var arrFiles = [];
+                var file = files[files.length-1];//不可多选，只有一个文件
                 if (file.type.indexOf("image") == 0 || /\.(gif|jpg|jpeg|png|bmp|GIF|JPG|JPEG|PNG|BMP)$/.test(file.name) || file.name.indexOf("image") != -1) {
+	                	var imgSize = 5*1024*1024;
+			        var imgText = '请上传小于5M的图片';
+			        if(this.isWeiXinOrUC()) {
+			            imgSize = 3*1024*1024;
+			            imgText = '请上传小于3M的图片';
+			        }
                     if (file.size >= imgSize) {
+                    		//清空file对象，否则上传同一张大图不会出发change事件
+                    		$(this.fileInput).val("");
                     		alert(imgText)
                       /*  $('.alertCont').html(imgText);
                         $('.alert3').fadeIn();
@@ -305,31 +293,33 @@
                             $('.alert3').fadeOut();
                         })*/
                     } else {
-                      $(this.fileInput).siblings('.img').removeClass('img')
-                      $(this.fileInput).siblings('.uploadProgress').show().html('上传中');
-                      return file;
+                      $(this.fileInput).siblings('.uploadProgress').show().html('上传中');//压缩过程会显示上传中
+                      arrFiles.push(file);
                     }
                 } else {
                     alert('请上传PNG或JPG格式的正方形图标');
                 }
+                return arrFiles;
             },
             onSelect: function(files) {
-                if(!files[0]) { return false;}
+                if(!files[files.length-1]) { return false;}
                 var self = this;
                 var funAppendImage = function() {
                     file = files[files.length-1];
                     if (file) {
-                        var imgs;
                         var reader = new FileReader();
                         reader.onload = function(e) {
                             var $name = file.name;
                             var suffix = $name.substr($name.lastIndexOf('.')+1);
                             var baseUrlInitially = "image/"+ suffix +";";
                             // 在htc手机型号下选取相册的照片的base64码缺乏“image/****;”需要判断并加上
-                            $(self.fileInput).siblings('img').attr("src",e.target.result.replace(/(.{5})/,"$1"+baseUrlInitially));
+                            $(self.fileInput)
+                            		.siblings('img')
+                            		.removeClass('img')
+                            		.attr("src",e.target.result.replace(/(.{5})/,"$1"+baseUrlInitially));
 							//准备压缩图片，并上传
-							self.beforeCompress(e.target.result,function(data){
-								self.funUploadFile(data);
+							self.beforeCompress(e.target.result,function(basestr){
+								self.funUploadFile(basestr);
 							});
                         }
                         reader.readAsDataURL(file);
@@ -337,17 +327,15 @@
                 };
                 funAppendImage();       
             },
-            beforeCompress:function(result, func){
+            beforeCompress:function(result, uploadCallback){
             		var self = this;
-            		
-                var maxsize = 1 * 1024;
-                
+                var maxsize = 100 * 1024;
                 var img = new Image();
                 img.src = result;
-               
                 //如果图片大小小于100kb，则直接上传
                 if (result.length <= maxsize){
                     img = null;
+                    uploadCallback();//上传
                     return;
                 }
 				//图片加载完毕之后进行压缩，然后上传
@@ -357,9 +345,8 @@
                     img.onload = callback;
                 }
                 function callback() {
-                    var data = self.onCompress(img);
-                    func(data);
-                    //
+                    var data = self.onCompress(img);//压缩
+                    uploadCallback(data);//上传
                     img = null;
                 }          
             },
@@ -416,36 +403,47 @@
             },
             funUploadFile:function(basestr) {
             		var self= this;
-            		//图片上传，将base64的图片转成二进制对象，塞进formdata上传
-            		var text = window.atob(basestr.split(",")[1]);
-                var buffer = new Uint8Array(text.length);
-                var pecent = 0 , loop = null;
-                for (var i = 0; i < text.length; i++) {
-                    buffer[i] = text.charCodeAt(i);
+            		var formdata = new FormData();
+            		if(basestr){
+	            		//图片上传，将base64的图片转成二进制对象，塞进formdata上传
+	            		var text = window.atob(basestr.split(",")[1]);
+	                var buffer = new Uint8Array(text.length);
+	                var pecent = 0 ;
+	                for (var i = 0; i < text.length; i++) {
+	                    buffer[i] = text.charCodeAt(i);
+	                }
+	                //获取blob对象的兼容性写法
+	                var blob = self.getBlob(buffer, "image/jpeg");
+	                var imgSrc = self.isWeiXinOrUC() ? self.fileFilter[0] : blob;
+	                formdata.append(self.type, imgSrc, self.fileFilter[0].name);
+                }else{
+                		formdata.append(self.type, self.fileFilter[0], self.fileFilter[0].name);
                 }
-                //获取blob对象的兼容性写法
-                var blob = self.getBlob(buffer, "image/jpeg");
-                var imgSrc = blob;
-                if(!!llStr) {imgSrc = self.fileFilter[0]};
-                console.log(self.fileFilter[0].name);
-                var formdata = new FormData();
-                formdata.append(self.type, imgSrc, self.fileFilter[0].name);
    
             		var xhr = new XMLHttpRequest();
-                xhr.open('post', self.url);
+                
                 xhr.onreadystatechange = function () {
-                    if (xhr.readyState == 4 && xhr.status == 200) {
-                        self.onSuccess(xhr.responseText);
+                    if (xhr.readyState == 4) {
+                    		if (xhr.status == 200) {
+	                        self.onSuccess(xhr.responseText);
+	                    }else{
+	                    		self.onFailure(xhr.responseText);
+	                    }
                     }else{
-                    		self.onFailure(xhr.responseText)
+                    		console.log("not ready-->"+xhr.readyState);
                     }
+                    // 上传成功与否都需将文件数组初始化
+                    self.fileFilter=[];
                 };
                 
                 //数据发送进度
-                xhr.upload.addEventListener('progress', function (e) {
+                /*xhr.upload.addEventListener('progress', function (e) {
                     self.onProgress(e.loaded, e.total);
-                }, false);
-                
+                }, false);*/
+                xhr.upload.onprogress = function(e){
+                		self.onProgress(e.loaded, e.total);
+                }
+                xhr.open('post', self.url, true);
                 xhr.send(formdata);
             },
             onProgress: function(loaded, total) {
@@ -470,10 +468,6 @@
                 $('.uploadProgress').hide(); 
                 
             },
-            onComplete: function() {
-                console.log('完成');
-                $('.uploadProgress').hide();
-            },
         		getBlob:function (buffer, format){
 		        var Builder = window.WebKitBlobBuilder || window.MozBlobBuilder;
 		        if(Builder){
@@ -490,77 +484,55 @@
 		    
     </script>
     <script type="text/javascript">
-    var loop;
-//   Do('c.common_h5',function(){
-//      var local = window.location.search;
-//      var appNum = <?= isset($isAppVersion) ? (int)$isAppVersion : 0 ?>;
-//      $('input[type=file]').on('click',function() {
-//          var id = $(this).attr('id');
-//          if(appNum) {
-//              if(id == 'fileElem') {
-//                  window.location.href = 'yongche://updatePicture?callback=uploadHeadImage&'+id+''; 
-//              } else if(id == 'fileElem1') {
-//                  window.location.href = 'yongche://updateDriverLicense?callback=uploadHeadImage&'+id+'';
-//              } else if(id == 'fileElem2') {
-//                  window.location.href = 'yongche://updateDriverNumber?callback=uploadHeadImage&'+id+'';
-//              } else {
-//                  window.location.href = 'yongche://updateDriverNumber?callback=uploadHeadImage&'+id+'';
-//              }
-//              return false;
-//          }
-//      })
-//
-//   })
-     function uploadHeadImage(codei,file_id,url,id) {
-       eval('var loop' + id);
-       _id = '#' + id;
-       if(codei == file_id) {
-            var pecent = 0;
-            $(_id).siblings(".uploadProgress").show();
-            eval('loop' + id + ' = setInterval(function () {pecent++;$(_id).siblings(".uploadProgress").html(pecent + "%");if (pecent >= 99) {clearInterval(loop'+id+');}}, 50)')
-       } else if(codei == 'failure') {
-            clearInterval(eval('loop' + id));
-            $(id).siblings('.uploadProgress').html("0%").hide();
-       } else if(codei == 'select') {
-            clearInterval(eval('loop' + id));
-            $(id).siblings('.uploadProgress').html("0%").hide();
-       } else {
-            if(codei == 200) {
-                 clearInterval(eval('loop' + id));
-                 $(_id).siblings('.uploadProgress').html("100%").hide();
-                 $(_id).siblings('img').attr('src',url);
-                 $(_id).siblings('input[type=hidden]').val(file_id);
-                 $(_id).parent().siblings('.det').show();
-            } else {
-                clearInterval(eval('loop' + id));
-                $(_id).siblings('.uploadProgress').html("0%").hide();
-                alert('抱歉，上传失败！请重新上传。');
-            }
-       } 
-        
-     }
-        
-    </script>
-    <script type="text/javascript">
 
         var identity_img_id = $.extend({},ZXXFILE, params,{
+          	myInit:function(){
+          		var self=this;
+          		$(".det")[0].addEventListener("click", function(e) { 
+          			self.fileFilter=[];
+          			$(this).siblings('.phone').find('img').addClass('img').attr('src','<{asset:media/g2/M02/10/04/rBEBP1hPli-ICujPAAAEVWaj5ZwAAGQ7AP_-5MAAARt612.png}>');
+	            		$(this).siblings('.phone').find('input').val('');
+	            		$(this).hide();
+          		}, false);
+          	},
             type : 'identity_img_id',
-            fileInput: document.querySelectorAll("#fileElem3")[0],
+            fileInput: $("#fileElem3")[0],
         });
 
         var identity_back_img_id = $.extend({},ZXXFILE, params,{
+          	myInit:function(){
+          		var self=this;
+          		$(".det")[1].addEventListener("click", function(e) { 
+          			self.fileFilter=[];
+          			$(this).siblings('.phone').find('img').addClass('img').attr('src','<{asset:media/g2/M02/10/04/rBEBP1hPli-ICujPAAAEVWaj5ZwAAGQ7AP_-5MAAARt612.png}>');
+	            		$(this).siblings('.phone').find('input').val('');
+	            		$(this).hide();
+          		}, false);
+          	},
             type : 'identity_back_img_id',
-            fileInput: document.querySelectorAll("#fileElem4")[0],
+            fileInput: $("#fileElem4")[0],
         });
 
         var identity_hand_img_id = $.extend({},ZXXFILE, params,{
+          	myInit:function(){
+          		var self=this;
+          		$(".det")[2].addEventListener("click", function(e) { 
+          			self.fileFilter=[];
+          			$(this).siblings('.phone').find('img').addClass('img').attr('src','<{asset:media/g2/M02/10/04/rBEBP1hPli-ICujPAAAEVWaj5ZwAAGQ7AP_-5MAAARt612.png}>');
+	            		$(this).siblings('.phone').find('input').val('');
+	            		$(this).hide();
+          		}, false);
+          	},
             type : 'identity_hand_img_id',
-            fileInput: document.querySelectorAll("#fileElem5")[0],
+            fileInput: $("#fileElem5")[0],
         });
 
         identity_img_id.init();
         identity_back_img_id.init();
         identity_hand_img_id.init();
+        identity_img_id.myInit();
+        identity_back_img_id.myInit();
+        identity_hand_img_id.myInit();
     </script>
     </body>
     </html>
