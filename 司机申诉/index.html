@@ -444,6 +444,7 @@
                 		self.onProgress(e.loaded, e.total);
                 }
                 xhr.open('post', self.url, true);
+                
                 xhr.send(formdata);
             },
             onProgress: function(loaded, total) {
