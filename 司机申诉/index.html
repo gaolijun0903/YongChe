@@ -378,27 +378,27 @@
                                 var tctx = tCanvas.getContext("2d");
                                 var maxsize = 1 * 1024;
 
-                                    var result = this.result;
-                                    var img = new Image();
-                                    imgs = img;
-                                    img.src = result;
-                                   
-                                    //如果图片大小小于100kb，则直接上传
-                                    if (result.length <= maxsize){
-                                        img = null;
-                                        return;
-                                    }
-                    //                图片加载完毕之后进行压缩，然后上传
-                                    if (img.complete) {
-                                        callback();
-                                    } else {
-                                        img.onload = callback;
-                                    }
-                                    function callback() {
-                                        var data = compress(img);
-                                        //upload(data, file.type, $(li));
-                                        img = null;
-                                    }
+                                var result = this.result;
+                                var img = new Image();
+                                imgs = img;
+                                img.src = result;
+                               
+                                //如果图片大小小于100kb，则直接上传
+                                if (result.length <= maxsize){
+                                    img = null;
+                                    return;
+                                }
+                //                图片加载完毕之后进行压缩，然后上传
+                                if (img.complete) {
+                                    callback();
+                                } else {
+                                    img.onload = callback;
+                                }
+                                function callback() {
+                                    var data = compress(img);
+                                    //upload(data, file.type, $(li));
+                                    img = null;
+                                }
                               
                                 //    使用canvas对大图片进行压缩
                                 function compress(img) {
