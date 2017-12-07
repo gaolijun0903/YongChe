@@ -4,13 +4,25 @@
 		<meta charset="UTF-8"/>
 	</head>
 <body>
-	<div class="aa">打开qq</div>
+	<div id="download"><a href="http://www.yongche.com/download/yongche.php?source=webadxz"><div id="">下载</div></a></div>
+	<a href="yongche://user.com" style="margin:50px;">lalalala</a>
 	<script type="text/javascript">
-//		http://www.yongche.com/cms/page/openyongche.html
-		window.location = "yongche://";
-		setTimeout(function(){ 
-		window.location="https://itunes.apple.com/cn/app/yi-dao-yong-che-wan-liang/id427555239?mt=8";
-		}, 30);
+		//http://www.yongche.com/cms/page/openyongche.html
+		$("#download").hide();
+		var isiOS = !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); 
+		alert(isiOS)
+        if(isiOS){
+            window.location = "yongche://";
+			setTimeout(function(){ 
+				window.location = "https://itunes.apple.com/cn/app/yi-dao-yong-che-wan-liang/id427555239?mt=8";
+			}, 30);
+        }else{
+        	window.location = "yongche://user.com";
+        	setTimeout(function(){ 
+				$("#download").show();
+			}, 30);
+        }
+		
 	</script>
 </body>
 </html>
